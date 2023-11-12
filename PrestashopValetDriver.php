@@ -6,7 +6,7 @@
  * @user https://github.com/ILDaviz
  * @source https://gitlab.com/snippets/1717590
  * @source https://gitlab.com/-/snippets/1717590
- * @version 1.6.1
+ * @version 1.6.2
  */
 
 namespace Valet\Drivers\Custom;
@@ -60,8 +60,13 @@ class PrestaShopValetDriver extends ValetDriver
                 }
             }
         }else{
-            if (str_contains($string, $doesContains)) {
-                return true;
+
+            if (!function_exists('str_contains')) {
+                return strpos($string, $doesContains) !== false;
+            } else {
+                if (str_contains($string, $doesContains)) {
+                    return true;
+                }
             }
         }
         return false;
